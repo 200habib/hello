@@ -6,6 +6,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin', function () {
+    return 'Area Admin';
+})->middleware('role:admin');
+
 
 Auth::routes();
 
