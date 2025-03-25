@@ -60,3 +60,29 @@ Route::get('/admin', function () {
 })->middleware('role:admin');
 
 ✅ Solo gli utenti con il ruolo admin potranno accedere a questa route.
+
+
+```bash
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+
+class ImageSeeder extends Seeder
+{
+    public function run()
+    {
+        // URL dell'immagine da scaricare
+        $imageUrl = 'https://example.com/path/to/image.jpg';
+
+        // Nome dell'immagine da salvare (puoi personalizzarlo come preferisci)
+        $imageName = 'image_' . time() . '.jpg';
+
+        // Scarica l'immagine e salvala direttamente nella cartella public/images
+        $imageContents = file_get_contents($imageUrl);
+
+        // Salva l'immagine nel disco 'public'
+        Storage::disk('public')->put('images/' . $imageName, $imageContents);
+
+        echo "Immagine salvata correttamente!";
+    }
+}
+```
